@@ -48,11 +48,24 @@ export default {
         btnValue: 'Go !'
     }
   },
+  created () {
+    var users = localStorage.getItem('joueursTableau')
+    if (users){
+        var usersArray = users.split(',')
+        console.log('Joueurs : ' + usersArray)
+        for (var i = 0; i < usersArray.length; i++){
+            this.names[i] = usersArray[i]
+        }
+    }else {
+        console.log('Aucun joueur')
+    }
+  },
   methods: {
     addName() {
         if (this.nom != '') {
             this.names.push(this.nom)
             this.nom = ''
+            localStorage.setItem('joueursTableau', this.names)
         }
     },
     actionNext () {
